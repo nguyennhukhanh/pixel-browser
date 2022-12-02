@@ -1,0 +1,6 @@
+url = "http://www.google.com/"
+home = "http://localhost:1410/home"
+host = "localhost"
+user = "root"
+password = "1029384756"
+database = "browserhistory"
