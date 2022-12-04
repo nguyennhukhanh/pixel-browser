@@ -113,11 +113,11 @@ class isMain(QMainWindow):
         help_menu = self.menuBar().addMenu("&Help")
         # THÊM TÁC VỤ HELP MENU
         navigate_home_action = QAction(QIcon(os.path.join('icons', 'back-to-home.png')),
-                                       "Homepage", self)
-        navigate_home_action.setStatusTip("Đến trang chủ")
+                                       "Google Page", self)
+        navigate_home_action.setStatusTip("Đến GG")
         help_menu.addAction(navigate_home_action)
-        # ĐIỀU HƯỚNG ĐẾN TRANG WEB MẶC ĐỊNH
-        navigate_home_action.triggered.connect(self.navigate_home)
+        # ĐIỀU HƯỚNG ĐẾN TRANG WEB GG
+        navigate_home_action.triggered.connect(self.navigate_url)
 
         # ĐẶT TÊN VÀ BIỂU TƯỢNG CHO ỨNG DỤNG
         self.setWindowTitle("Pixel Browser")
@@ -189,9 +189,9 @@ class isMain(QMainWindow):
             border-radius: 10px;
         }""")
 
-        # MẶC ĐỊNH HOME PAGE LÀ GOOGLE.COM
+        # MẶC ĐỊNH HOME PAGE LÀ HOME
         label = 'Homepage'
-        self.add_new_tab(QUrl(url), label)
+        self.add_new_tab(QUrl(home), label)
 
         # SHOW MAIN WINDOW
         self.show()
@@ -310,6 +310,10 @@ class isMain(QMainWindow):
     # ĐIỀU HƯỚNG ĐẾN TRANG CHỦ
     def navigate_home(self):
         self.tabs.currentWidget().setUrl(QUrl(home))
+    
+    # ĐIỀU HƯỚNG ĐẾN GG
+    def navigate_url(self):
+        self.tabs.currentWidget().setUrl(QUrl(url))
 
 
 app = QApplication(sys.argv)

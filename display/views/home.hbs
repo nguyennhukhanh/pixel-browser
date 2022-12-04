@@ -1,754 +1,160 @@
-<html lang='vi'>
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Home</title>
+  <link rel="stylesheet" href="./style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 
-    <head>
-        <meta charset='UTF-8' />
-        <title>Home</title>
-        <link rel='stylesheet' href='./style.css' />
-
-    </head>
-
-    <body>
-        <div id='webgl'></div>
-        <div id='bg-box'>
-            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'>
-                <path
-                    fill='#34496a'
-                    d='M0 0v600h800V0zm405.6 458.4C217 458.4 64.1 360.6 64.1 240S217 21.5 405.6 21.5 747.3 119.3 747.3 240s-153 218.4-341.6 218.4z'
-                ></path>
-            </svg>
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<body class="opening hide-UI view-2D zoom-large data-close controls-close">
+    <div id="navbar">
+      <a id="toggle-data" href="#data"><i class="icon-data"></i>Data</a>
+      <h1>Solar<br><span>by <a href="https://facebook.com/KWalkerNNK" target="_blank">@Khanh Nguyen</a></span></h1>
+      <a id="toggle-controls" href="#controls"><i class="icon-controls"></i>Controls</a>
+    </div>
+    <div id="data">
+      <a class="sun" title="sun" href="#sunspeed">Sun</a>
+      <a class="mercury" title="mercury" href="#mercuryspeed">Mercury</a>
+      <a class="venus" title="venus" href="#venusspeed">Venus</a>
+      <a class="earth active" title="earth" href="#earthspeed">Earth</a>
+      <a class="mars" title="mars" href="#marsspeed">Mars</a>
+      <a class="jupiter" title="jupiter" href="#jupiterspeed">Jupiter</a>
+      <a class="saturn" title="saturn" href="#saturnspeed">Saturn</a>
+      <a class="uranus" title="uranus" href="#uranusspeed">Uranus</a>
+      <a class="neptune" title="neptune" href="#neptunespeed">Neptune</a>
+    </div>
+    <div id="controls">
+      <label class="set-view">
+        <input type="checkbox">
+      </label>
+      <label class="set-zoom">
+        <input type="checkbox">
+      </label>
+      <label>
+        <input type="radio" class="set-speed" name="scale" checked>
+        <span>Speed</span>
+      </label>
+      <label>
+        <input type="radio" class="set-size" name="scale">
+        <span>Size</span>
+      </label>
+      <label>
+        <input type="radio" class="set-distance" name="scale">
+        <span>Distance</span>
+      </label>
+    </div>
+    <div id="universe" class="scale-stretched">
+      <div id="galaxy">
+        <div id="solar-system" class="earth">
+          <div id="mercury" class="orbit">
+            <div class="pos">
+              <div class="planet">
+                <dl class="infos">
+                  <dt>Mercury</dt>
+                  <dd><span></span></dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+          <div id="venus" class="orbit">
+            <div class="pos">
+              <div class="planet">
+                <dl class="infos">
+                  <dt>Venus</dt>
+                  <dd><span></span></dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+          <div id="earth" class="orbit">
+            <div class="pos">
+              <div class="orbit">
+                <div class="pos">
+                  <div class="moon"></div>
+                </div>
+              </div>
+              <div class="planet">
+                <dl class="infos">
+                  <dt>Earth</dt>
+                  <dd><span></span></dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+          <div id="mars" class="orbit">
+            <div class="pos">
+              <div class="planet">
+                <dl class="infos">
+                  <dt>Mars</dt>
+                  <dd><span></span></dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+          <div id="jupiter" class="orbit">
+            <div class="pos">
+              <div class="planet">
+                <dl class="infos">
+                  <dt>Jupiter</dt>
+                  <dd><span></span></dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+          <div id="saturn" class="orbit">
+            <div class="pos">
+              <div class="planet">
+                <div class="ring"></div>
+                <dl class="infos">
+                  <dt>Saturn</dt>
+                  <dd><span></span></dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+          <div id="uranus" class="orbit">
+            <div class="pos">
+              <div class="planet">
+                <dl class="infos">
+                  <dt>Uranus</dt>
+                  <dd><span></span></dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+          <div id="neptune" class="orbit">
+            <div class="pos">
+              <div class="planet">
+                <dl class="infos">
+                  <dt>Neptune</dt>
+                  <dd><span></span></dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+          <div id="sun">
+            <dl class="infos">
+              <dt>Sun</dt>
+              <dd><span></span></dd>
+            </dl>
+          </div>
         </div>
-        <div class='svg-box'>
-            <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'>
-                <defs></defs>
-                <defs>
-                    <clipPath id='clip-path'>
-                        <rect
-                            id='graph-line-mask'
-                            width='105.2'
-                            height='66.7'
-                            x='439.5'
-                            y='186.6'
-                            fill='none'
-                        ></rect>
-                    </clipPath>
-                    <clipPath id='clip-path-2'>
-                        <path
-                            id='body-mask'
-                            fill='none'
-                            d='M490.4 368.3c0 63.7-38 140-84.7 140s-84.8-76.3-84.8-140 38-90.6 84.8-90.6 84.7 26.9 84.7 90.6z'
-                        ></path>
-                    </clipPath>
-                </defs>
-                <g id='Ship'>
+      </div>
+    </div>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    if (typeof jQuery == 'undefined') { 
+      document.write(unescape("%3Cscript src='js/jquery.min.js' type='text/javascript'%3E%3C/script%3E"));
+    }
+    </script>
+    <script src="js/prefixfree.min.js"></script>
+    <script src="js/scripts.min.js"></script>
+  </body>
+<!-- partial -->
+  <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script><script  src="./script.js"></script>
 
-                    <g id='mid-display'>
-                        <rect
-                            width='320.3'
-                            height='207'
-                            x='248.8'
-                            y='116.3'
-                            fill='#282e39'
-                            stroke='#0ff'
-                            stroke-miterlimit='10'
-                            stroke-width='5'
-                            opacity='.8'
-                            rx='18.4'
-                        ></rect>
-                        <g id='graph-btm'>
-                            <path
-                                id='graph-left'
-                                fill='#0ff'
-                                d='M439.7 292.1s4.5-19.4 8.7-19c3.6.3 4.6 9.2 7.3 9 3.4-.2 4-14 7.3-14.3 3-.2 4.7 10 8.3 10 4 0 5.1-12.6 8.8-12.8 4.1-.2 7.2 27.1 7.2 27.1z'
-                            ></path>
-                            <path
-                                id='graph-morph1'
-                                fill='none'
-                                d='M439.7 292.1s2.2-10.8 6.5-10.4c3.5.3 8.3-18.9 11-19 3.4-.3 5.6 9 9 8.7 3-.3 3.5-3.2 7-3.2 4 0 5.9 10.6 9.5 10.4 4.2-.2 4.7 13.5 4.7 13.5z'
-                            ></path>
-                            <path
-                                id='graph-right'
-                                fill='#34496a'
-                                d='M502.6 292.1s4.5-19.4 8.8-19c3.5.3 4.6 9.2 7.3 9 3.4-.2 3.9-14 7.3-14.3 3-.2 4.7 10 8.3 10 4 0 5-12.6 8.7-12.8 4.2-.2 7.3 27.1 7.3 27.1z'
-                            ></path>
-                            <path
-                                id='graph-morph2'
-                                fill='none'
-                                d='M502.6 292.1s4.5-9.8 8.8-9.4c3.5.3 4.6-6.8 7.3-7 3.4-.2 3.9 6.6 7.3 6.4 3-.3 4.7-17.9 8.3-17.9 4 0 5 16.5 8.7 16.3 4.2-.2 7.3 11.6 7.3 11.6z'
-                            ></path>
-                        </g>
-                        <g id='planet'>
-                            <circle
-                                id='planet-base'
-                                cx='332.2'
-                                cy='207.8'
-                                r='37.3'
-                                fill='#34496a'
-                            ></circle>
-                            <ellipse
-                                id='planet-circle'
-                                cx='331.5'
-                                cy='207.8'
-                                fill='none'
-                                stroke='#0ff'
-                                stroke-miterlimit='10'
-                                stroke-width='5'
-                                rx='61.8'
-                                ry='12.7'
-                            ></ellipse>
-                            <path
-                                id='planet-top'
-                                fill='#34496a'
-                                d='M294.9 207.8a37.3 37.3 0 0174.6 0z'
-                            ></path>
-                        </g>
-                        <g class='graph-circle-lb' id='graph-cir-left'>
-                            <circle
-                                cx='290.4'
-                                cy='287.5'
-                                r='20.8'
-                                fill='#34496a'
-                            ></circle>
-                            <path
-                                fill='#0ff'
-                                d='M290.4 287.5l5.3-20.1a20.8 20.8 0 0115.5 20z'
-                            ></path>
-                        </g>
-                        <g class='graph-circle-lb' id='graph-cir-mid'>
-                            <circle
-                                cx='345.4'
-                                cy='287.5'
-                                r='20.8'
-                                fill='#34496a'
-                            ></circle>
-                            <path
-                                fill='#0ff'
-                                d='M345.4 287.5l5.2-20.1a20.8 20.8 0 0115.5 20z'
-                            ></path>
-                        </g>
-                        <g id='graph-cir'>
-                            <circle
-                                cx='396.4'
-                                cy='292.1'
-                                r='16.4'
-                                fill='none'
-                                stroke='#34496a'
-                                stroke-miterlimit='10'
-                                stroke-width='2'
-                            ></circle>
-                            <circle
-                                cx='396.4'
-                                cy='292.1'
-                                r='20.8'
-                                fill='none'
-                                stroke='#34496a'
-                                stroke-miterlimit='10'
-                                stroke-width='2'
-                            ></circle>
-                            <circle
-                                cx='396.4'
-                                cy='292.1'
-                                r='11.6'
-                                fill='none'
-                                stroke='#34496a'
-                                stroke-miterlimit='10'
-                                stroke-width='2'
-                            ></circle>
-                            <circle
-                                id='graph-cir-1'
-                                cx='408'
-                                cy='292.1'
-                                r='2.3'
-                                fill='#0ff'
-                            ></circle>
-                            <circle
-                                id='graph-cir-2'
-                                cx='396.4'
-                                cy='275.7'
-                                r='2.3'
-                                fill='#0ff'
-                            ></circle>
-                            <circle
-                                id='graph-cir-3'
-                                cx='417.2'
-                                cy='292.1'
-                                r='2.3'
-                                fill='#0ff'
-                            ></circle>
-                            <circle
-                                id='graph-cir-mid-2'
-                                cx='396.4'
-                                cy='292.1'
-                                r='2.3'
-                                fill='#0ff'
-                                data-name='graph-cir-mid'
-                            ></circle>
-                        </g>
-                        <g id='graph-big' clip-path='url(#clip-path)'>
-                            <path
-                                id='graph-line'
-                                fill='none'
-                                stroke='#0ff'
-                                stroke-miterlimit='10'
-                                stroke-width='5'
-                                d='M439.7 206.4c26.3 0 26.3 34.2 52.6 34.2s26.3-34.2 52.6-34.2 26.3 34.2 52.6 34.2 26.3-34.2 52.6-34.2'
-                            ></path>
-                        </g>
-                        <circle
-                            cx='275.7'
-                            cy='139.7'
-                            r='11.8'
-                            fill='#34496a'
-                        ></circle>
-                        <circle
-                            id='left-top-circle'
-                            cx='275.7'
-                            cy='139.7'
-                            r='11.8'
-                            fill='#0ff'
-                        ></circle>
-                        <line
-                            x1='300.8'
-                            x2='387.1'
-                            y1='134.3'
-                            y2='134.9'
-                            fill='none'
-                            stroke='#34496a'
-                            stroke-linecap='round'
-                            stroke-miterlimit='10'
-                            stroke-width='5'
-                        ></line>
-                        <line
-                            x1='300.8'
-                            x2='338.5'
-                            y1='143.7'
-                            y2='143.9'
-                            fill='none'
-                            stroke='#34496a'
-                            stroke-linecap='round'
-                            stroke-miterlimit='10'
-                            stroke-width='5'
-                        ></line>
-                        <circle
-                            cx='448.1'
-                            cy='161.4'
-                            r='13.3'
-                            fill='none'
-                            stroke='#34496a'
-                            stroke-miterlimit='10'
-                            stroke-width='5'
-                        ></circle>
-                        <path
-                            class='circles-top'
-                            id='circle-l'
-                            fill='none'
-                            stroke='#0ff'
-                            stroke-miterlimit='10'
-                            stroke-width='5'
-                            d='M448 148.2a13.3 13.3 0 11-13.2 13.3 13.3 13.3 0 0113.3-13.3'
-                        ></path>
-                        <circle
-                            cx='491.2'
-                            cy='161.4'
-                            r='13.3'
-                            fill='none'
-                            stroke='#34496a'
-                            stroke-miterlimit='10'
-                            stroke-width='5'
-                        ></circle>
-                        <path
-                            class='circles-top'
-                            id='circle-m'
-                            fill='none'
-                            stroke='#0ff'
-                            stroke-miterlimit='10'
-                            stroke-width='5'
-                            d='M491.2 148.2a13.3 13.3 0 11-13.3 13.3 13.3 13.3 0 0113.3-13.3'
-                        ></path>
-                        <circle
-                            cx='534.4'
-                            cy='161.4'
-                            r='13.3'
-                            fill='none'
-                            stroke='#34496a'
-                            stroke-miterlimit='10'
-                            stroke-width='5'
-                        ></circle>
-                        <path
-                            class='circles-top'
-                            id='circle-r'
-                            fill='none'
-                            stroke='#0ff'
-                            stroke-miterlimit='10'
-                            stroke-width='5'
-                            d='M534.4 148.2a13.3 13.3 0 11-13.3 13.3 13.3 13.3 0 0113.3-13.3'
-                        ></path>
-                    </g>
-                    <g id='btm-display'>
-                        <g id='right-display'>
-                            <g id='right-display-display'>
-                                <path
-                                    fill='#282e39'
-                                    stroke='#0ff'
-                                    stroke-miterlimit='10'
-                                    stroke-width='5'
-                                    d='M654.7 461H508.6c-10.5 0-15.8-8.5-12-19l26.2-72a29.9 29.9 0 0125.8-18.9h146c10.5 0 15.8 8.5 12 19l-26.2 72a29.9 29.9 0 01-25.7 18.8z'
-                                    opacity='.8'
-                                ></path>
-                                <g id='bars'>
-                                    <polygon
-                                        id='bar-3-btm'
-                                        fill='#34496a'
-                                        points='656.9 441.2 642.4 441.2 667.6 371.7 682.2 371.7 656.9 441.2'
-                                    ></polygon>
-                                    <polygon
-                                        id='bar-3-top'
-                                        fill='#0ff'
-                                        points='656.9 441.2 642.4 441.2 653 412 667.5 412 656.9 441.2'
-                                    ></polygon>
-                                    <polygon
-                                        id='bar-2-btm'
-                                        fill='#34496a'
-                                        points='633.7 441.2 619.2 441.2 644.5 371.7 659 371.7 633.7 441.2'
-                                    ></polygon>
-                                    <polygon
-                                        id='bar-2-top'
-                                        fill='#0ff'
-                                        points='633.7 441.2 619.2 441.2 636 395.1 650.5 395.1 633.7 441.2'
-                                    ></polygon>
-                                    <polygon
-                                        id='bar-1-btm'
-                                        fill='#34496a'
-                                        points='610.6 441.2 596.1 441.2 621.4 371.7 635.9 371.7 610.6 441.2'
-                                    ></polygon>
-                                    <polygon
-                                        id='bar-1-top'
-                                        fill='#0ff'
-                                        points='610.6 441.2 596.1 441.2 604 419.5 618.5 419.5 610.6 441.2'
-                                    ></polygon>
-                                </g>
-                                <g id='btns' fill='#0ff'>
-                                    <ellipse
-                                        cx='546.8'
-                                        cy='379.3'
-                                        rx='6.5'
-                                        ry='4.6'
-                                        transform='rotate(-39.8 546.8 379.3)'
-                                    ></ellipse>
-                                    <ellipse
-                                        cx='562.7'
-                                        cy='379.3'
-                                        rx='6.5'
-                                        ry='4.6'
-                                        transform='rotate(-39.8 562.7 379.3)'
-                                    ></ellipse>
-                                    <ellipse
-                                        cx='578.6'
-                                        cy='379.3'
-                                        rx='6.5'
-                                        ry='4.6'
-                                        transform='rotate(-39.8 578.6 379.3)'
-                                    ></ellipse>
-                                    <ellipse
-                                        cx='594.5'
-                                        cy='379.3'
-                                        rx='6.5'
-                                        ry='4.6'
-                                        transform='rotate(-39.8 594.5 379.3)'
-                                    ></ellipse>
-                                    <ellipse
-                                        cx='540.6'
-                                        cy='396.3'
-                                        rx='6.5'
-                                        ry='4.6'
-                                        transform='rotate(-39.8 540.6 396.3)'
-                                    ></ellipse>
-                                    <ellipse
-                                        cx='556.5'
-                                        cy='396.3'
-                                        rx='6.5'
-                                        ry='4.6'
-                                        transform='rotate(-39.8 556.5 396.3)'
-                                    ></ellipse>
-                                    <ellipse
-                                        cx='572.4'
-                                        cy='396.3'
-                                        rx='6.5'
-                                        ry='4.6'
-                                        transform='rotate(-39.8 572.4 396.3)'
-                                    ></ellipse>
-                                    <ellipse
-                                        cx='588.3'
-                                        cy='396.3'
-                                        rx='6.5'
-                                        ry='4.6'
-                                        transform='rotate(-39.8 588.4 396.3)'
-                                    ></ellipse>
-                                    <ellipse
-                                        cx='534.4'
-                                        cy='413.3'
-                                        rx='6.5'
-                                        ry='4.6'
-                                        transform='rotate(-39.8 534.4 413.3)'
-                                    ></ellipse>
-                                    <ellipse
-                                        cx='550.3'
-                                        cy='413.3'
-                                        rx='6.5'
-                                        ry='4.6'
-                                        transform='rotate(-39.8 550.3 413.3)'
-                                    ></ellipse>
-                                    <ellipse
-                                        cx='566.2'
-                                        cy='413.3'
-                                        rx='6.5'
-                                        ry='4.6'
-                                        transform='rotate(-39.8 566.2 413.3)'
-                                    ></ellipse>
-                                    <ellipse
-                                        cx='582.1'
-                                        cy='413.3'
-                                        rx='6.5'
-                                        ry='4.6'
-                                        transform='rotate(-39.8 582.2 413.3)'
-                                    ></ellipse>
-                                    <ellipse
-                                        cx='528.2'
-                                        cy='430.3'
-                                        rx='6.5'
-                                        ry='4.6'
-                                        transform='rotate(-39.8 528.2 430.3)'
-                                    ></ellipse>
-                                    <ellipse
-                                        cx='544.1'
-                                        cy='430.3'
-                                        rx='6.5'
-                                        ry='4.6'
-                                        transform='rotate(-39.8 544.1 430.3)'
-                                    ></ellipse>
-                                    <ellipse
-                                        cx='560'
-                                        cy='430.3'
-                                        rx='6.5'
-                                        ry='4.6'
-                                        transform='rotate(-39.6 562.3 429.7)'
-                                    ></ellipse>
-                                    <ellipse
-                                        cx='575.9'
-                                        cy='430.3'
-                                        rx='6.5'
-                                        ry='4.6'
-                                        transform='rotate(-39.8 576 430.3)'
-                                    ></ellipse>
-                                </g>
-                            </g>
-                            <ellipse
-                                id='right-display-shadow'
-                                cx='593.3'
-                                cy='508.4'
-                                fill='#1e3855'
-                                rx='74'
-                                ry='10.9'
-                            ></ellipse>
-                        </g>
-                        <g id='left-display'>
-                            <g id='left-display-display'>
-                                <path
-                                    fill='#282e39'
-                                    stroke='#0ff'
-                                    stroke-miterlimit='10'
-                                    stroke-width='5'
-                                    d='M299 461H153c-10.4 0-22-8.5-25.8-19L101 370c-3.8-10.4 1.6-18.9 12-18.9h146c10.5 0 22 8.5 25.9 18.9l26.2 72c3.8 10.4-1.6 19-12 19z'
-                                    opacity='.8'
-                                ></path>
-                                <polygon
-                                    fill='#0ff'
-                                    points='153.1 433.3 155.7 440.3 158.2 447.3 153.6 443.8 148.9 440.3 151 436.8 153.1 433.3'
-                                ></polygon>
-                                <polygon
-                                    fill='#0ff'
-                                    points='143 433.3 146.4 433.3 151.9 448.4 148.5 448.4 143 433.3'
-                                ></polygon>
-                                <polygon
-                                    fill='#0ff'
-                                    points='193.8 448.4 191.3 441.4 188.7 434.4 193.4 437.9 198 441.4 195.9 444.9 193.8 448.4'
-                                ></polygon>
-                                <polygon
-                                    fill='#0ff'
-                                    points='203.9 448.4 200.6 448.4 195.1 433.3 198.4 433.3 203.9 448.4'
-                                ></polygon>
-                                <polygon
-                                    fill='#0ff'
-                                    points='164.4 433.3 167.8 433.3 173.3 448.4 169.9 448.4 164.4 433.3'
-                                ></polygon>
-                                <polygon
-                                    fill='#0ff'
-                                    points='174 433.3 177.4 433.3 182.9 448.4 179.5 448.4 174 433.3'
-                                ></polygon>
-                                <ellipse
-                                    cx='199'
-                                    cy='377.7'
-                                    fill='#34496a'
-                                    rx='5.4'
-                                    ry='7.7'
-                                    transform='rotate(-50.2 199 377.7)'
-                                ></ellipse>
-                                <polygon
-                                    fill='#0ff'
-                                    points='198.2 380.9 197 377.7 195.9 374.6 199.2 376.1 202.6 377.7 200.4 379.3 198.2 380.9'
-                                ></polygon>
-                                <line
-                                    x1='217.3'
-                                    x2='267.5'
-                                    y1='377.7'
-                                    y2='377.7'
-                                    fill='#282e39'
-                                    stroke='#0ff'
-                                    stroke-linecap='round'
-                                    stroke-miterlimit='10'
-                                    stroke-width='5'
-                                    opacity='.8'
-                                ></line>
-                                <ellipse
-                                    cx='206.2'
-                                    cy='397.6'
-                                    fill='#34496a'
-                                    rx='5.4'
-                                    ry='7.7'
-                                    transform='rotate(-50.2 206.2 397.6)'
-                                ></ellipse>
-                                <polygon
-                                    fill='#0ff'
-                                    points='205.4 400.7 204.2 397.6 203.1 394.4 206.4 396 209.8 397.6 207.6 399.2 205.4 400.7'
-                                ></polygon>
-                                <line
-                                    x1='224.5'
-                                    x2='274.8'
-                                    y1='397.6'
-                                    y2='397.6'
-                                    fill='#282e39'
-                                    stroke='#0ff'
-                                    stroke-linecap='round'
-                                    stroke-miterlimit='10'
-                                    stroke-width='5'
-                                    opacity='.8'
-                                ></line>
-                                <ellipse
-                                    cx='213.5'
-                                    cy='417.5'
-                                    fill='#34496a'
-                                    rx='5.4'
-                                    ry='7.7'
-                                    transform='rotate(-50.2 213.4 417.4)'
-                                ></ellipse>
-                                <polygon
-                                    fill='#0ff'
-                                    points='212.6 420.6 211.5 417.5 210.3 414.3 213.7 415.9 217 417.5 214.8 419 212.6 420.6'
-                                ></polygon>
-                                <line
-                                    x1='231.8'
-                                    x2='282'
-                                    y1='417.5'
-                                    y2='417.5'
-                                    fill='#282e39'
-                                    stroke='#0ff'
-                                    stroke-linecap='round'
-                                    stroke-miterlimit='10'
-                                    stroke-width='5'
-                                    opacity='.8'
-                                ></line>
-                                <ellipse
-                                    cx='220.7'
-                                    cy='437.3'
-                                    fill='#34496a'
-                                    rx='5.4'
-                                    ry='7.7'
-                                    transform='rotate(-50.2 220.7 437.3)'
-                                ></ellipse>
-                                <polygon
-                                    fill='#0ff'
-                                    points='219.8 440.5 218.7 437.3 217.6 434.2 220.9 435.8 224.3 437.3 222.1 438.9 219.8 440.5'
-                                ></polygon>
-                                <line
-                                    x1='239'
-                                    x2='289.2'
-                                    y1='437.3'
-                                    y2='437.3'
-                                    fill='#282e39'
-                                    stroke='#0ff'
-                                    stroke-linecap='round'
-                                    stroke-miterlimit='10'
-                                    stroke-width='5'
-                                    opacity='.8'
-                                ></line>
-                                <path
-                                    fill='#34496a'
-                                    d='M190.5 424.4h-46a7.4 7.4 0 01-6.5-4.7l-15.8-43.5c-1-2.6.4-4.7 3-4.7h46a7.4 7.4 0 016.5 4.7l15.8 43.5c1 2.6-.4 4.7-3 4.7z'
-                                ></path>
-                                <ellipse
-                                    cx='157.8'
-                                    cy='398'
-                                    fill='#282e39'
-                                    rx='17.5'
-                                    ry='25.1'
-                                    transform='rotate(-50.2 157.8 398)'
-                                ></ellipse>
-                                <ellipse
-                                    cx='157.8'
-                                    cy='398'
-                                    fill='#282e39'
-                                    rx='5.1'
-                                    ry='7.3'
-                                    transform='rotate(-50.2 157.8 398)'
-                                ></ellipse>
-                                <path
-                                    fill='#0ff'
-                                    d='M159.8 405a10 10 0 01-8.8-6.4 5.8 5.8 0 01.5-5.4 5.3 5.3 0 014.4-2.2 10 10 0 018.8 6.4 5.8 5.8 0 01-.5 5.4 5.3 5.3 0 01-4.4 2.1zm-3.9-10.6a2 2 0 00-1.6.7 2.5 2.5 0 000 2.3 6.6 6.6 0 005.4 4 2 2 0 001.7-.6 2.5 2.5 0 000-2.3 6.6 6.6 0 00-5.5-4zM173.6 405h14.5l-5.1-14h-14.4a1.8 1.8 0 00-1.7 2.6l3.2 8.7a4.1 4.1 0 003.5 2.6z'
-                                ></path>
-                            </g>
-                            <ellipse
-                                id='left-display-shadow'
-                                cx='224.5'
-                                cy='511.5'
-                                fill='#1e3855'
-                                rx='74'
-                                ry='10.9'
-                            ></ellipse>
-                        </g>
-                    </g>
-                    <g id='robot'>
-                        <path
-                            id='body-base'
-                            fill='#fff'
-                            d='M490.4 368.3c0 63.7-38 140-84.7 140s-84.8-76.3-84.8-140 38-90.6 84.8-90.6 84.7 26.9 84.7 90.6z'
-                        ></path>
-                        <g id='robot-body'>
-                            <ellipse
-                                id='robot-shadow'
-                                cx='405.6'
-                                cy='543.9'
-                                fill='#1e3855'
-                                rx='44.5'
-                                ry='7.1'
-                            ></ellipse>
-                            <g clip-path='url(#clip-path-2)'>
-                                <g id='faces'>
-                                    <g id='face'>
-                                        <ellipse
-                                            id='face-back'
-                                            cx='560'
-                                            cy='340.9'
-                                            fill='#34496a'
-                                            rx='61.5'
-                                            ry='32.2'
-                                        ></ellipse>
-                                        <g class='eyes' id='eyes' fill='#0ff'>
-                                            <ellipse
-                                                cx='539.8'
-                                                cy='340.9'
-                                                rx='7.3'
-                                                ry='13.7'
-                                            ></ellipse>
-                                            <ellipse
-                                                cx='579.1'
-                                                cy='340.9'
-                                                rx='7.3'
-                                                ry='13.7'
-                                            ></ellipse>
-                                        </g>
-                                    </g>
-                                    <g id='face-2' data-name='face'>
-                                        <ellipse
-                                            id='face-back-2'
-                                            cx='256.9'
-                                            cy='340.9'
-                                            fill='#34496a'
-                                            data-name='face-back'
-                                            rx='61.5'
-                                            ry='32.2'
-                                        ></ellipse>
-                                        <g
-                                            class='eyes'
-                                            id='eyes-2'
-                                            fill='#0ff'
-                                            data-name='eyes'
-                                        >
-                                            <ellipse
-                                                cx='236.7'
-                                                cy='340.9'
-                                                rx='7.3'
-                                                ry='13.7'
-                                            ></ellipse>
-                                            <ellipse
-                                                cx='275.9'
-                                                cy='340.9'
-                                                rx='7.3'
-                                                ry='13.7'
-                                            ></ellipse>
-                                        </g>
-                                    </g>
-                                    <g id='charge'>
-                                        <circle
-                                            cx='406.8'
-                                            cy='340.9'
-                                            r='16.2'
-                                            fill='#34496a'
-                                        ></circle>
-                                        <rect
-                                            width='4.1'
-                                            height='13.9'
-                                            x='398.7'
-                                            y='334'
-                                            fill='#fff'
-                                        ></rect>
-                                        <rect
-                                            width='4.1'
-                                            height='13.9'
-                                            x='410.8'
-                                            y='334'
-                                            fill='#fff'
-                                        ></rect>
-                                    </g>
-                                </g>
-                            </g>
-                        </g>
-                        <path
-                            id='right-hand'
-                            fill='#fff'
-                            d='M549.7 400.7c0 15.6-31.2 28.2-56.2 28.2s-34.2-12.6-34.2-28.2 9.2-28 34.2-28 56.2 12.5 56.2 28z'
-                        ></path>
-                        <path
-                            id='left-hand'
-                            fill='#fff'
-                            d='M255.6 400.7c0-15.5 31.2-28 56.2-28s34.2 12.5 34.2 28-9.3 28.2-34.2 28.2-56.2-12.6-56.2-28.2z'
-                        ></path>
-                    </g>
-                    <path
-                        id='note-1'
-                        fill='none'
-                        d='M180 317l-3.5-3.8a1 1 0 00-1.7.7v8.1a6 6 0 00-2-.3c-2.5 0-4.6 1.6-4.6 3.5s2 3.5 4.7 3.5 4.6-1.5 4.6-3.5a3 3 0 00-.7-1.9v-6.8l1.7 1.8a1 1 0 101.5-1.4z'
-                    ></path>
-                    <path
-                        id='note-2'
-                        fill='none'
-                        d='M203.4 323.4v-9.5a1 1 0 00-1-1h-9.3a1 1 0 00-1 1v8.1a6 6 0 00-2-.3c-2.5 0-4.6 1.6-4.6 3.5s2 3.5 4.7 3.5 4.6-1.5 4.6-3.5a2.9 2.9 0 00-.7-1.9V315h7.3v7.1a5.8 5.8 0 00-1.9-.3c-2.6 0-4.7 1.6-4.7 3.5s2.1 3.5 4.7 3.5 4.7-1.5 4.7-3.5a2.9 2.9 0 00-.8-1.8z'
-                    ></path>
-                </g>
-            </svg>
-        </div>
-        <canvas class='webgl2'></canvas>
-
-        <script
-            src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r125/three.min.js'
-        ></script>
-        <script src='https://unpkg.co/gsap@3/dist/gsap.min.js'></script>
-        <script
-            src='https://assets.codepen.io/16327/MorphSVGPlugin3.min.js'
-        ></script>
-        <script
-            src='https://assets.codepen.io/16327/DrawSVGPlugin3.min.js'
-        ></script>
-        <script src='./script.js'></script>
-
-    </body>
-
+</body>
 </html>
