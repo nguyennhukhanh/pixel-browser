@@ -32,12 +32,10 @@ app.get('/history', async (req, res) => {
                     e.execute('SELECT * FROM browserhistory.cache'),
                 );
                 return await rows;
+            } else {
+                console.log('Lỗi truy vấn!');
             }
-            else {
-                console.log('Lỗi truy vấn!')
-            }
-        }
-        catch (e) {
+        } catch (e) {
             console.log('Lỗi kết nối', e);
         }
     }
@@ -45,7 +43,6 @@ app.get('/history', async (req, res) => {
     rows.then(function (target) {
         res.render('index', { target });
     });
-
 });
 
 app.get('/delete/:id', async (req, res) => {
@@ -57,9 +54,8 @@ app.get('/delete/:id', async (req, res) => {
                     e.execute(`DELETE FROM cache WHERE id=${par}`),
                 );
                 return await rows;
-            }
-            else {
-                console.log('Lỗi truy vấn!')
+            } else {
+                console.log('Lỗi truy vấn!');
             }
         } catch (e) {
             console.log('Lỗi kết nối', e);
@@ -79,9 +75,8 @@ app.get('/delete-all', async (req, res) => {
                     e.execute(`DELETE FROM cache`),
                 );
                 return await rows;
-            }
-            else {
-                console.log('Lỗi truy vấn!')
+            } else {
+                console.log('Lỗi truy vấn!');
             }
         } catch (e) {
             console.log('Lỗi kết nối', e);
@@ -96,7 +91,6 @@ app.get('/delete-all', async (req, res) => {
 app.get('/home', async (req, res) => {
     return res.render('home', { home: true });
 });
-
 
 app.listen(port, () => {
     console.log(`Đang lắng nghe cổng ${port}`);
