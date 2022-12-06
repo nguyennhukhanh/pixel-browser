@@ -15,4 +15,4 @@ async function connect() {
         console.log('Lỗi kết nối', e);
     }
 }
-module.exports = { connect };
+export default connect();
