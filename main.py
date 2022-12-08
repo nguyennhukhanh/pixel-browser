@@ -9,4 +9,3 @@ app.setOrganizationDomain("https://github.com/KWalkerNNK/pixel-browser")
 
 window = isMain()
 app.exec_()
-

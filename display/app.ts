@@ -4,6 +4,8 @@ import morgan from 'morgan';
 import { engine } from 'express-handlebars';
 import connect from './config/connect';
 import { Connection } from 'mysql2/promise';
+import bodyParser from 'body-parser';
+import getDecorator from './routers/decorator-get';
 
 const app = express();
 const port: number = 1410;
@@ -14,22 +16,33 @@ app.use(express.static(path.join(__dirname, 'views')));
 
 app.use(morgan('combined'));
 
+app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.engine(
     'hbs',
     engine({
         extname: '.hbs',
+        helpers: {
+            sum: (a: number, b: number) => a + b,
+        },
     }),
 );
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 
-app.get('/history', async (req, res) => {
+getDecorator(app, final, '/history', 'SELECT * FROM browserhistory.cache');
+
+app.post('/search', async (req, res) => {
+    let query = req.body.search;
     async function connect() {
         try {
             if (final) {
                 const [rows] = await final.then((e: any) =>
-                    e.execute('SELECT * FROM browserhistory.cache'),
+                    e.execute(
+                        `SELECT * FROM cache WHERE address like "%${query}%"`,
+                    ),
                 );
                 return await rows;
             } else {

@@ -80,7 +80,6 @@ class isMain(QMainWindow):
         navtb.addWidget(self.urlbar)
         # TẢI URL KHI NHẤN NÚT ON PRESS
         self.urlbar.returnPressed.connect(self.navigate_to_url)
-        
 
         # THÊM NÚT DỪNG ĐỂ DỪNG TẢI URL
         stop_btn = QAction(
@@ -101,7 +100,7 @@ class isMain(QMainWindow):
         # THÊM NEW TAB
         new_tab_action.triggered.connect(lambda _: self.add_new_tab())
 
-        #LỊCH SỬ DUYỆT WEB
+        # LỊCH SỬ DUYỆT WEB
         history_tab_action = QAction(
             QIcon(os.path.join('icons', 'history.png')), "History", self)
         history_tab_action.setStatusTip("Lịch sử duyệt web")
@@ -221,11 +220,12 @@ class isMain(QMainWindow):
         browser.loadFinished.connect(lambda _, i=i, browser=browser:
                                      self.tabs.setTabText(i, browser.page().title()))
 
-    #THÊM LỊCH SỬ TAB
+    # THÊM LỊCH SỬ TAB
     def history_tab(self, qurl=None, label="Lịch Sử"):
         # Kiểm tra xem giá trị url có trống không
         if qurl is None:
-            qurl = QUrl('http://localhost:1410/history')  # Gán chuỗi rỗng vào url
+            # Gán chuỗi rỗng vào url
+            qurl = QUrl('http://localhost:1410/history')
 
         # Tải url đã ghi đè
         browser = QWebEngineView()
@@ -266,7 +266,7 @@ class isMain(QMainWindow):
             # Nếu Schema là https, thay đổi biểu tượng thành ổ khóa bị khóa để cho biết rằng trang web được bảo mật
             self.httpsicon.setPixmap(
                 QPixmap(os.path.join('icons', 'locked.png')))
-            #Lưu lịch sử vào db
+            # Lưu lịch sử vào db
             save_history(q.toString())
 
         else:
@@ -310,7 +310,7 @@ class isMain(QMainWindow):
     # ĐIỀU HƯỚNG ĐẾN TRANG CHỦ
     def navigate_home(self):
         self.tabs.currentWidget().setUrl(QUrl(home))
-    
+
     # ĐIỀU HƯỚNG ĐẾN GG
     def navigate_url(self):
         self.tabs.currentWidget().setUrl(QUrl(url))

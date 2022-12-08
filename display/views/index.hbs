@@ -1,12 +1,25 @@
 <title>Lịch Sử</title>
-<div class='mt-5' style='display: flex; justify-content: flex-end;'>
-    <a href='/delete-all' type='button' class='btn btn-danger'>Xoá tất cả</a></div>
+<div class="row mt-5">
+    <div class="col-9">
+        <form action="/search" method="post">
+            <div class="input-group">
+                <input type="search" name="search" class="form-control rounded" placeholder="Bạn muốn tìm gì?"
+                    aria-label="Search" aria-describedby="search-addon" />
+                <button type="submit" class="btn btn-outline-success">Tìm Kiếm</button>
+            </div>
+        </form>
+    </div>
+    <div class='col' style='display: flex; justify-content: flex-end;'>
+        <a href='/delete-all' type='button' class='btn btn-danger'>Xoá tất cả</a>
+    </div>
+</div>
 <div class='table-responsive'>
     <table class='table caption-top table-hover'>
         <caption class='my-3'>Lịch Sử duyệt Web trên Pixel Browser</caption>
         <thead class='table-light'>
             <tr class='table-primary'>
                 <th scope='col'>#</th>
+                <th scope='col'>ID</th>
                 <th scope='col'>Link</th>
                 <th scope='col'>Thời gian</th>
                 <th scope='col'>Hành động</th>
@@ -14,19 +27,14 @@
         </thead>
         <tbody>
             {{#each target}}
-                <tr>
-                    <th scope='row'>{{this.id}}</th>
-                    <td><a href='{{this.address}}'><span
-                                class='d-inline-block text-truncate'
-                                style='max-width: 400px;'
-                            >{{this.address}}</span></a></td>
-                    <td>{{this.timestamp}}</td>
-                    <td><a
-                            href='/delete/{{this.id}}'
-                            type='button'
-                            class='btn btn-outline-danger'
-                        >Xoá</a></td>
-                </tr>
+            <tr>
+                <th scope='row'>{{sum @key 1}}</th>
+                <th scope='row'>{{this.id}}</th>
+                <td><a href='{{this.address}}'><span class='d-inline-block text-truncate'
+                            style='max-width: 400px;'>{{this.address}}</span></a></td>
+                <td>{{this.timestamp}}</td>
+                <td><a href='/delete/{{this.id}}' type='button' class='btn btn-outline-danger'>Xoá</a></td>
+            </tr>
             {{/each}}
         </tbody>
     </table>
